@@ -1,0 +1,32 @@
+<div class="container">
+  <h1>Employee Data</h1>
+  <form>
+    <div class="form-group">
+      <label for="exampleInputEmail1">NIK</label>
+      <input class="form-control" appearance="fill" type="text" name="nik" disabled value="{{nik}}">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Name</label>
+      <input type="text" class="form-control" name="nik" (change)="onChangeEvent($event)" value="{{name}}">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Division:</label>
+      <select class="form-control" (change)="onChangeDivision($event)" [value]="selectedDivision">
+        <option *ngFor="let division of divisionList" [value]="division.id">
+          {{division.name}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Position:</label>
+      <select class="form-control" (change)="onChangePostn($event)" [value]="selectedPosition">
+        <option *ngFor="let position of positionList" [value]="position.id">
+          {{position.name}}
+        </option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary" routerLink="/">Cancel</button>
+    <button type="submit" class="btn btn-primary" style="margin-left: 550px;"
+      [disabled]="selectedPosition === 0 || selectedDivision === 0 || name === ''" (click)="save()">Save</button>
+  </form>
+</div>

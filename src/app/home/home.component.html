@@ -1,0 +1,50 @@
+<div style="margin: 10px;">
+  <h1>Employees</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col" width="30px">ID</th>
+        <th scope="col">NIK</th>
+        <th scope="col">Name</th>
+        <th scope="col">Division</th>
+        <th scope="col">Position</th>
+        <th scope="col">Type</th>
+        <th scope="col">Last Position</th>
+        <th scope="col">Created Date</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of dataEmployees;">
+        <td scope="row">{{ employee.id | number }}</td>
+        <td>{{ employee.nik }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.division }}</td>
+        <td>{{ employee.position }}</td>
+        <td>{{ employee.type }}</td>
+        <td>{{ employee.lastPosition }}</td>
+        <td>{{employee.createdDate | date}}</td>
+        <td class="button-row">
+          <button class="btn btn-info" style="margin-right:10px;" [routerLink]="['/form', employee.id]">Edit</button>
+          <button class="btn btn-danger" (click)="delete(employee)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+
+    <div class="d-flex justify-content-between p-2 table-pagination">
+      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+        (pageChange)="refreshCountries()">
+      </ngb-pagination>
+
+      <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="8">8 items per page</option>
+        <option [ngValue]="12">12 items per page</option>
+        <option [ngValue]="16">16 items per page</option>
+      </select>
+    </div>
+
+    <button type="button" class="btn btn-primary" routerLink="/form">Add an Employee</button>
+
+  </table>
+</div>
